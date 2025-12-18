@@ -128,6 +128,7 @@ fun DashboardScreen(
                 ?.getOrNull(0) ?: ""
             if (spokenText.isNotEmpty()) {
                 userInput = spokenText
+                isVoiceOutputEnabled = true // Activar respuesta de voz al usar micrófono
             }
         }
     }
@@ -497,7 +498,10 @@ fun DashboardScreen(
                     errorMessage = errorMessage,
                     listState = listState,
                     userInput = userInput,
-                    onUserInputChange = { userInput = it },
+                    onUserInputChange = { 
+                        userInput = it 
+                        isVoiceOutputEnabled = false // Desactivar voz si el usuario escribe
+                    },
                     onSendMessage = { sendMessage() },
                     isVoiceInputEnabled = isVoiceInputEnabled,
                     onVoiceInputToggle = { isVoiceInputEnabled = it },
